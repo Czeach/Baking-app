@@ -9,5 +9,19 @@
         android:id="@+id/bakingListFragment"
         android:name="com.example.android.bakingapp.bakingList.BakingListFragment"
         android:label="BakingListFragment"
-        tools:layout="@layout/fragment_baking_list"/>
+        tools:layout="@layout/fragment_baking_list">
+        <action
+            android:id="@+id/action_bakingListFragment_to_ingredientListFragment"
+            app:destination="@id/ingredientListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ingredientListFragment"
+        android:name="com.example.android.bakingapp.ingredientList.IngredientListFragment"
+        android:label="fragment_ingredient_list"
+        tools:layout="@layout/fragment_ingredient_list" >
+        <argument
+            android:name="recipe"
+            app:argType="com.example.android.bakingapp.network.Recipe"
+            />
+    </fragment>
 </navigation>

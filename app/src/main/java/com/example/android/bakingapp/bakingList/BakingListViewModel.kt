@@ -1,9 +1,11 @@
 package com.example.android.bakingapp.bakingList
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import android.util.Log
+import android.widget.Toast
+import androidx.lifecycle.*
 import com.example.android.bakingapp.network.BakingApi
+import com.example.android.bakingapp.network.Ingredient
 import com.example.android.bakingapp.network.Recipe
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -11,7 +13,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class BakingListViewModel(): ViewModel() {
+class BakingListViewModel: ViewModel() {
 
     private val _response = MutableLiveData<String>()
 
@@ -38,8 +40,24 @@ class BakingListViewModel(): ViewModel() {
             try {
                 _recipe.value = recipeList
             } catch (e: Exception) {
-                _response.value = "Failure: ${e.message}"
+                _response.value = "Failure: " + e.message
+                Log.e("", "The error's from getBakingList")
             }
         }
+    }
+
+    private val _navigateToSelectedRecipe = MutableLiveData<Recipe>()
+
+    val navigateToSelectedRecipe: LiveData<Recipe>
+        get() = _navigateToSelectedRecipe
+
+    // initiate navigation to the detail screen on item click
+    fun displayRecipeDetail(recipe: Recipe) {
+        _navigateToSelectedRecipe.value = recipe
+    }
+
+    // set _navigateToSelectedProperty to false once navigation is completed to prevent unwanted extra navigation
+    fun displayRecipeDetailComplete() {
+        _navigateToSelectedRecipe.value = null
     }
 }
