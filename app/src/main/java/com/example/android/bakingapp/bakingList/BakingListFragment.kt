@@ -30,10 +30,6 @@ class BakingListFragment : Fragment() {
         savedInstanceState: Bundle?): View? {
 
         // Get a reference to the binding object and inflate the fragment views.
-//        val binding: FragmentBakingListBinding = DataBindingUtil.inflate(
-//            inflater, R.layout.fragment_baking_list, container, false
-//        )
-
         val binding = FragmentBakingListBinding.inflate(inflater)
 
         binding.setLifecycleOwner(this)

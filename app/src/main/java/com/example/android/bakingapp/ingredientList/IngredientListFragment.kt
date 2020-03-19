@@ -6,50 +6,50 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.databinding.DataBindingUtil
-import com.example.android.bakingapp.R
+import androidx.lifecycle.Observer
+import androidx.viewpager.widget.ViewPager
+import com.example.android.bakingapp.TabsAdapter
 import com.example.android.bakingapp.databinding.FragmentIngredientListBinding
+import com.google.android.material.tabs.TabLayout
 
 class IngredientListFragment : Fragment() {
-
-//    var ingredientAdapter = IngredientAdapter(arrayListOf())
 
     private val viewModel: IngredientListViewModel by lazy {
         ViewModelProviders.of(this).get(IngredientListViewModel::class.java)
     }
 
+    var tabLayout: TabLayout? = null
+    var viewPager: ViewPager? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
 
-//        val application = requireNotNull(activity).application
-//        val ingredient = IngredientListFragmentArgs.fromBundle(arguments!!).selectedRecipe
-//        val viewModelFactory = IngredientListViewModelFactory(ingredient, application)
-
         // Get a reference to the binding object and inflate the fragment views.
-        val binding: FragmentIngredientListBinding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_ingredient_list, container, false
-        )
-//        val binding = FragmentIngredientListBinding.inflate(inflater)
-
-//        binding.ingredientListViewModel = ViewModelProviders.of(
-//            this, viewModelFactory).get(IngredientListViewModel::class.java)
+        val binding = FragmentIngredientListBinding.inflate(inflater)
 
         binding.setLifecycleOwner(this)
 
 //        binding.ingredientListViewModel = viewModel
 
-//        binding.ingredientRecycler.apply {
-//            layoutManager = LinearLayoutManager(activity)
-//            adapter = ingredientAdapter
-//
-//            binding.executePendingBindings()
-//        }
+        tabLayout = binding.tabLayout
+        viewPager = binding.viewPager
 
-//        viewModel.selectedRecipe.observe(viewLifecycleOwner, Observer {
-//            ingredientAdapter.updateIngredientList(it)
-//        })
+        tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
 
+        val myTabsAdapter = TabsAdapter(activity!!.supportFragmentManager, tabLayout!!.tabCount)
+        viewPager!!.adapter = myTabsAdapter
+
+        viewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
+
+        tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                viewPager!!.currentItem = tab!!.position
+            }
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+        })
 
         return binding.root
     }
