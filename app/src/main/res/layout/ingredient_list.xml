@@ -8,7 +8,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.android.bakingapp.network.Recipe" />
+            type="com.example.android.bakingapp.network.Ingredient" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

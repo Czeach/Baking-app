@@ -46,18 +46,4 @@ class BakingListViewModel: ViewModel() {
         }
     }
 
-    private val _navigateToSelectedRecipe = MutableLiveData<Recipe>()
-
-    val navigateToSelectedRecipe: LiveData<Recipe>
-        get() = _navigateToSelectedRecipe
-
-    // initiate navigation to the detail screen on item click
-    fun displayRecipeDetail(recipe: Recipe) {
-        _navigateToSelectedRecipe.value = recipe
-    }
-
-    // set _navigateToSelectedProperty to false once navigation is completed to prevent unwanted extra navigation
-    fun displayRecipeDetailComplete() {
-        _navigateToSelectedRecipe.value = null
-    }
 }

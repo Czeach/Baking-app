@@ -9,20 +9,25 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
 import com.example.android.bakingapp.TabsAdapter
+import com.example.android.bakingapp.bakingList.BakingListViewModel
 import com.example.android.bakingapp.databinding.FragmentIngredientListBinding
 import com.google.android.material.tabs.TabLayout
 
 class IngredientListFragment : Fragment() {
 
-    private val viewModel: IngredientListViewModel by lazy {
-        ViewModelProviders.of(this).get(IngredientListViewModel::class.java)
-    }
+    private var viewModel: BakingListViewModel? = null
+
+//    private val viewModel: BakingListViewModel by lazy {
+//        ViewModelProviders.of(this).get(BakingListViewModel::class.java)
+//    }
 
     var tabLayout: TabLayout? = null
     var viewPager: ViewPager? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
+
+        viewModel = ViewModelProviders.of(this).get(BakingListViewModel::class.java)
 
         // Get a reference to the binding object and inflate the fragment views.
         val binding = FragmentIngredientListBinding.inflate(inflater)

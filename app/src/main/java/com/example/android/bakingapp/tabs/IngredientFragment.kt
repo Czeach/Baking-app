@@ -2,46 +2,49 @@ package com.example.android.bakingapp.tabs
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android.bakingapp.IngredientsTabAdapter
 import com.example.android.bakingapp.databinding.FragmentIngredientBinding
+import com.example.android.bakingapp.network.Ingredient
+import com.example.android.bakingapp.network.Recipe
 
 /**
  * A simple [Fragment] subclass.
  */
 class IngredientFragment : Fragment() {
 
-    private var ingredientAdapter = IngredientsTabAdapter(arrayListOf())
-
-    private val viewModel: IngredientViewModel by lazy {
-        ViewModelProviders.of(this).get(IngredientViewModel::class.java)
-    }
+//    private val viewModel: IngredientListViewModel by lazy {
+//        ViewModelProviders.of(this).get(IngredientListViewModel::class.java)
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_ingredient, container, false)
+
+        val ingredients = arguments?.getParcelableArrayList<Ingredient>("Ingredients") as ArrayList<Ingredient>
+
+        val ingredientAdapter = IngredientsTabAdapter(arrayListOf())
+
+//        ingredientAdapter.updateList(ingredients)
+
         val binding = FragmentIngredientBinding.inflate(inflater)
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
+
+//        binding.ingredientTabRecycler.adapter = ingredientAdapter
 
         binding.ingredientTabRecycler.apply {
+
             layoutManager = LinearLayoutManager(activity)
             adapter = ingredientAdapter
 
             binding.executePendingBindings()
         }
-
-        viewModel.ingredient.observe(viewLifecycleOwner, Observer {
-            ingredientAdapter.updateList(it)
-        })
 
         return binding.root
     }

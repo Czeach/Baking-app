@@ -1,14 +1,13 @@
 package com.example.android.bakingapp
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.bakingapp.databinding.HomeListBinding
 import com.example.android.bakingapp.databinding.IngredientListBinding
@@ -20,23 +19,10 @@ import com.example.android.bakingapp.tabs.VideosFragment
 import kotlinx.android.synthetic.main.home_list.view.*
 import kotlinx.android.synthetic.main.ingredient_list.view.*
 
+typealias bakingItemClickListener = (Recipe) -> Unit
 
-class BakingListAdapter(private var list: ArrayList<Recipe>, private val onClickListener: OnClickListener) :
-    ListAdapter<Recipe, BakingListAdapter.BakingListViewHolder>(DiffCallback) {
-
-    companion object DiffCallback : DiffUtil.ItemCallback<Recipe>() {
-        override fun areItemsTheSame(oldItem: Recipe, newItem: Recipe): Boolean {
-            return oldItem === newItem
-        }
-
-        override fun areContentsTheSame(oldItem: Recipe, newItem: Recipe): Boolean {
-            return oldItem.steps == newItem.steps
-        }
-    }
-
-    class OnClickListener(val clickListener: (recipe: Recipe) -> Unit) {
-        fun onClick(recipe: Recipe) = clickListener(recipe)
-    }
+class BakingListAdapter(private var list: ArrayList<Recipe>, private val clickListener: bakingItemClickListener) :
+    RecyclerView.Adapter<BakingListAdapter.BakingListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BakingListViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -46,9 +32,6 @@ class BakingListAdapter(private var list: ArrayList<Recipe>, private val onClick
 
     override fun onBindViewHolder(holder: BakingListViewHolder, position: Int) {
         val recipe: Recipe = list[position]
-        holder.itemView.setOnClickListener {
-            onClickListener.onClick(recipe)
-        }
         holder.bind(recipe)
     }
 
@@ -60,8 +43,9 @@ class BakingListAdapter(private var list: ArrayList<Recipe>, private val onClick
     override fun getItemCount(): Int = list.size
 
 
-    class BakingListViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
-        RecyclerView.ViewHolder(inflater.inflate(R.layout.home_list, parent, false)) {
+    inner class BakingListViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
+        RecyclerView.ViewHolder(inflater.inflate(R.layout.home_list, parent, false)),
+        View.OnClickListener {
 
         private val binding = HomeListBinding.inflate(inflater)
 
@@ -76,8 +60,13 @@ class BakingListAdapter(private var list: ArrayList<Recipe>, private val onClick
                 mImageView = itemView.image_view
                 mNameView = itemView.name_view
                 mServingsView = itemView.servings_view
-
             }
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(view: View?) {
+            var recipe = list[adapterPosition]
+            clickListener.invoke(recipe)
         }
 
         fun bind(recipe: Recipe) {
@@ -88,6 +77,7 @@ class BakingListAdapter(private var list: ArrayList<Recipe>, private val onClick
 
             binding.executePendingBindings()
         }
+
     }
 }
 
@@ -115,7 +105,7 @@ class TabsAdapter(fm: FragmentManager, private var totalTabs: Int) :
 }
 
 
-class IngredientsTabAdapter(private var list: ArrayList<Recipe> ):
+class IngredientsTabAdapter(private var list: ArrayList<Ingredient> ):
 RecyclerView.Adapter<IngredientsTabAdapter.IngredientsTabViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientsTabViewHolder {
@@ -125,38 +115,37 @@ RecyclerView.Adapter<IngredientsTabAdapter.IngredientsTabViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: IngredientsTabViewHolder, position: Int) {
-        val ingredient: Recipe = list[position]
+        val ingredient: Ingredient = list[position]
 
-//        holder.bin(ingredient)
         holder.Bind(ingredient)
     }
 
-    fun updateList(ingredientList: ArrayList<Recipe>) {
+    fun updateList(ingredientList: ArrayList<Ingredient>) {
         list = ingredientList
         notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = list.size
 
-    class IngredientsTabViewHolder(inflater: LayoutInflater, parent: ViewGroup):
+    inner class IngredientsTabViewHolder(inflater: LayoutInflater, parent: ViewGroup):
             RecyclerView.ViewHolder(inflater.inflate(R.layout.ingredient_list, parent, false)) {
 
         private val binding = IngredientListBinding.inflate(inflater)
 
-        private var mIngredientView: TextView? = null
+        private var mIngredient: TextView? = null
 
         init {
             binding.apply {
                 invalidateAll()
 
-                mIngredientView = itemView.ingredient_view
+                mIngredient = itemView.ingredient_view
             }
         }
 
-        fun Bind(ingredient: Recipe) {
+        fun Bind(ingredient: Ingredient) {
             binding.viewModel = ingredient
 
-            mIngredientView?.text = ingredient.ingredients.toString()
+            mIngredient?.text = ingredient.ingredient
 
             binding.executePendingBindings()
         }
