@@ -5,16 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import android.widget.Toast
-import androidx.annotation.RequiresPermission
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.android.bakingapp.BakingListAdapter
 import com.example.android.bakingapp.bakingItemClickListener
 import com.example.android.bakingapp.databinding.FragmentBakingListBinding
@@ -27,8 +23,8 @@ class BakingListFragment : Fragment() {
             override fun invoke(recipe: Recipe) {
                 Toast.makeText(activity, "Clicked", Toast.LENGTH_SHORT).show()
                 Log.e("", "Passed arguments successfully")
-                val action = BakingListFragmentDirections.actionBakingListFragmentToIngredientListFragment(recipe)
-                findNavController().navigate(action)
+                val argument = BakingListFragmentDirections.actionBakingListFragmentToIngredientListFragment(recipe)
+                findNavController().navigate(argument)
             }
         }
     }
