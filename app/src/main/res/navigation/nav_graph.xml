@@ -11,17 +11,16 @@
         android:label="BakingListFragment"
         tools:layout="@layout/fragment_baking_list">
         <action
-            android:id="@+id/action_bakingListFragment_to_ingredientListFragment"
-            app:destination="@id/ingredientListFragment" />
+            android:id="@+id/action_bakingListFragment_to_tabFragment"
+            app:destination="@id/tabFragment" />
     </fragment>
     <fragment
-        android:id="@+id/ingredientListFragment"
-        android:name="com.example.android.bakingapp.ingredientList.IngredientListFragment"
-        android:label="fragment_ingredient_list"
-        tools:layout="@layout/fragment_ingredient_list" >
+        android:id="@+id/tabFragment"
+        android:name="com.example.android.bakingapp.tabs.TabFragment"
+        android:label="fragment_tab"
+        tools:layout="@layout/fragment_tab" >
         <argument
             android:name="recipe"
-            app:argType="com.example.android.bakingapp.network.Recipe"
-            />
+            app:argType="com.example.android.bakingapp.network.Recipe"/>
     </fragment>
 </navigation>

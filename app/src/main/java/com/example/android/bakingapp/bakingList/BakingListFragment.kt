@@ -23,7 +23,7 @@ class BakingListFragment : Fragment() {
             override fun invoke(recipe: Recipe) {
                 Toast.makeText(activity, "Clicked", Toast.LENGTH_SHORT).show()
                 Log.e("", "Passed arguments successfully")
-                val argument = BakingListFragmentDirections.actionBakingListFragmentToIngredientListFragment(recipe)
+                val argument = BakingListFragmentDirections.actionBakingListFragmentToTabFragment(recipe)
                 findNavController().navigate(argument)
             }
         }

@@ -13,9 +13,6 @@ import com.example.android.bakingapp.databinding.HomeListBinding
 import com.example.android.bakingapp.databinding.IngredientListBinding
 import com.example.android.bakingapp.network.Ingredient
 import com.example.android.bakingapp.network.Recipe
-import com.example.android.bakingapp.tabs.DescriptionFragment
-import com.example.android.bakingapp.tabs.IngredientFragment
-import com.example.android.bakingapp.tabs.VideosFragment
 import kotlinx.android.synthetic.main.home_list.view.*
 import kotlinx.android.synthetic.main.ingredient_list.view.*
 
@@ -79,76 +76,4 @@ class BakingListAdapter(private var list: ArrayList<Recipe>, private val clickLi
         }
 
     }
-}
-
-
-class TabsAdapter(fm: FragmentManager, private var totalTabs: Int) :
-        FragmentPagerAdapter(fm) {
-
-    override fun getItem(position: Int): Fragment {
-        when(position) {
-            0 -> {
-                return IngredientFragment()
-            }
-            1 -> {
-                return DescriptionFragment()
-            }
-            else -> {
-                return VideosFragment()
-            }
-        }
-    }
-
-    override fun getCount(): Int {
-        return totalTabs
-    }
-}
-
-
-class IngredientsTabAdapter(private var list: ArrayList<Ingredient> ):
-RecyclerView.Adapter<IngredientsTabAdapter.IngredientsTabViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientsTabViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-
-        return IngredientsTabViewHolder(inflater, parent )
-    }
-
-    override fun onBindViewHolder(holder: IngredientsTabViewHolder, position: Int) {
-        val ingredient: Ingredient = list[position]
-
-        holder.Bind(ingredient)
-    }
-
-    fun updateList(ingredientList: ArrayList<Ingredient>) {
-        list = ingredientList
-        notifyDataSetChanged()
-    }
-
-    override fun getItemCount(): Int = list.size
-
-    inner class IngredientsTabViewHolder(inflater: LayoutInflater, parent: ViewGroup):
-            RecyclerView.ViewHolder(inflater.inflate(R.layout.ingredient_list, parent, false)) {
-
-        private val binding = IngredientListBinding.inflate(inflater)
-
-        private var mIngredient: TextView? = null
-
-        init {
-            binding.apply {
-                invalidateAll()
-
-                mIngredient = itemView.ingredient_view
-            }
-        }
-
-        fun Bind(ingredient: Ingredient) {
-            binding.viewModel = ingredient
-
-            mIngredient?.text = ingredient.ingredient
-
-            binding.executePendingBindings()
-        }
-    }
-
 }
