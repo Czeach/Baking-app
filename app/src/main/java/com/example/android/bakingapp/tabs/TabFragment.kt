@@ -42,7 +42,6 @@ class TabFragment : Fragment() {
             when(position) {
                 0 -> tab.text = "Ingredients"
                 1 -> tab.text = "Steps"
-                2 -> tab.text = "Videos"
             }
         }.attach()
     }
@@ -55,6 +54,13 @@ class TabFragment : Fragment() {
                 putParcelableArrayList("Ingredients", args.recipe.ingredients)
             }
         })
+
+        fragments.add(StepFragment().apply {
+            arguments = Bundle().apply {
+                putParcelableArrayList("Steps", args.recipe.steps)
+            }
+        })
+
 
         return fragments
     }

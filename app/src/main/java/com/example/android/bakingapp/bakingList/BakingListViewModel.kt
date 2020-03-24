@@ -39,8 +39,8 @@ class BakingListViewModel: ViewModel() {
             val recipeList = BakingApi.retrofitService.getProperties()
             try {
                 _recipe.value = recipeList
-            } catch (e: Exception) {
-                _response.value = "Failure: " + e.message
+            } catch (t: Throwable) {
+                _response.value = "Failure: " + t.message
                 Log.e("", "The error's from getBakingList")
             }
         }

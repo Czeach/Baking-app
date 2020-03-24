@@ -22,5 +22,16 @@
         <argument
             android:name="recipe"
             app:argType="com.example.android.bakingapp.network.Recipe"/>
+        <action
+            android:id="@+id/action_tabFragment_to_videoFragment"
+            app:destination="@id/videoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/videoFragment"
+        android:name="com.example.android.bakingapp.VideoFragment"
+        tools:layout="@layout/fragment_video">
+        <argument
+            android:name="thisStep"
+            app:argType="com.example.android.bakingapp.network.Step"/>
     </fragment>
 </navigation>

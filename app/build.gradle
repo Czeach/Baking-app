@@ -25,6 +25,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     dataBinding {
         enabled = true
     }
@@ -80,9 +84,11 @@ dependencies {
     // Gson
     implementation "com.squareup.retrofit2:converter-gson:2.6.0"
 
-    // ViewPager2
+    // ViewPager2 $ TabLayout
     implementation "androidx.viewpager2:viewpager2:1.0.0"
-
     implementation "com.google.android.material:material:1.2.0-alpha05"
+
+    //Exoplayer
+    implementation 'com.google.android.exoplayer:exoplayer:2.11.1'
 
 }
