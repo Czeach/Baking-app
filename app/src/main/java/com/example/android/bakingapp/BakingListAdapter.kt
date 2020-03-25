@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -25,10 +26,13 @@ class BakingListAdapter(private var list: ArrayList<Recipe>, private val clickLi
         val inflater = LayoutInflater.from(parent.context)
 
         return BakingListViewHolder(inflater, parent)
+
+
     }
 
     override fun onBindViewHolder(holder: BakingListViewHolder, position: Int) {
         val recipe: Recipe = list[position]
+
         holder.bind(recipe)
     }
 
@@ -69,8 +73,17 @@ class BakingListAdapter(private var list: ArrayList<Recipe>, private val clickLi
         fun bind(recipe: Recipe) {
             binding.viewModel = recipe
 
+
+            when(position) {
+                0 -> mImageView?.setBackgroundResource(R.drawable.nutella_pie)
+                1 -> mImageView?.setBackgroundResource(R.drawable.brownies)
+                2 -> mImageView?.setBackgroundResource(R.drawable.yellow_cake)
+                3 -> mImageView?.setBackgroundResource(R.drawable.cheesecake)
+                else -> mImageView?.setBackgroundResource(R.color.colorPrimaryDark)
+            }
+
             mNameView?.text = recipe.name
-            mServingsView?.text = recipe.servings.toString()
+            mServingsView?.text = "servings: " + recipe.servings.toString()
 
             binding.executePendingBindings()
         }

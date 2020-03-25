@@ -16,6 +16,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+<!--        <androidx.appcompat.widget.Toolbar-->
+<!--            android:id="@+id/toolbar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="60dp"-->
+<!--            app:title="Baking App"-->
+<!--            android:elevation="0dp"-->
+<!--            app:titleTextColor="#C2185B"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            android:theme="@style/Theme.AppCompat.Light"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/home_list_recycler"
             android:layout_width="match_parent"

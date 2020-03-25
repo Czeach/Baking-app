@@ -19,6 +19,7 @@ import com.example.android.bakingapp.network.Step
  * A simple [Fragment] subclass.
  */
 class StepFragment : Fragment() {
+    lateinit var recipe: Recipe
 
 private val onStepItemClicked by lazy {
     object: StepItemClickListener {
@@ -47,14 +48,14 @@ private val onStepItemClicked by lazy {
 
         stepAdapter.updateList(steps)
 
-        (requireActivity() as MainActivity).title = "Step"
+        (requireActivity() as MainActivity).title = "Steps"
 
         return  binding.root
     }
 
     override fun onResume() {
         super.onResume()
-        (requireActivity() as MainActivity).title = "Step"
+        (requireActivity() as MainActivity).title = "Steps"
     }
 
 

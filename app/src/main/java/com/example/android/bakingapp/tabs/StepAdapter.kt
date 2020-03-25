@@ -57,8 +57,9 @@ class StepAdapter(private var list: ArrayList<Step>, var listener: StepItemClick
 
         fun Bind(step: Step) {
 
-            mId?.text = step.id.toString()
             mDescription?.text = step.shortDescription
+            val number = 1 + step.id
+            mId?.text = number.toString()
         }
     }
 }

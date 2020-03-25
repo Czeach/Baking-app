@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android.bakingapp.BakingListAdapter
+import com.example.android.bakingapp.MainActivity
+import com.example.android.bakingapp.R
 import com.example.android.bakingapp.bakingItemClickListener
 import com.example.android.bakingapp.databinding.FragmentBakingListBinding
 import com.example.android.bakingapp.network.Recipe
@@ -36,8 +38,9 @@ class BakingListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
 
-        Log.d("", "${ArrayList<Recipe>()}")
+        (requireActivity() as MainActivity).title = "Recipes"
 
+        Log.d("", "${ArrayList<Recipe>()}")
 
         // Get a reference to the binding object and inflate the fragment views.
         val binding = FragmentBakingListBinding.inflate(inflater)
@@ -60,5 +63,9 @@ class BakingListFragment : Fragment() {
         })
 
         return binding.root
+    }
+    override fun onResume() {
+        super.onResume()
+        (requireActivity() as MainActivity).title = "Recipes"
     }
 }

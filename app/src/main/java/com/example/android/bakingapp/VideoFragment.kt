@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.navigation.fragment.navArgs
 import com.google.android.exoplayer2.ExoPlayerFactory
@@ -28,7 +29,7 @@ import kotlinx.android.synthetic.main.fragment_video.*
 class VideoFragment : Fragment() {
 
     private lateinit var playerView: PlayerView
-    private lateinit var simpleExoPlayer: SimpleExoPlayer
+    private var simpleExoPlayer: SimpleExoPlayer? = null
     private val playbackPosition = 0L
 
     private val bandwidthMeter by lazy {
@@ -78,15 +79,15 @@ class VideoFragment : Fragment() {
             dataSourceFactory, extractorsFactory, mainHandler, null
         )
 
-        simpleExoPlayer.prepare(videoSource)
+        simpleExoPlayer?.prepare(videoSource)
 
-        simpleExoPlayer.playWhenReady = true
+        simpleExoPlayer?.playWhenReady = true
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putLong("Playback Position", simpleExoPlayer.currentPosition)
-    }
+//    override fun onSaveInstanceState(outState: Bundle) {
+//        super.onSaveInstanceState(outState)
+//        outState.putLong("Playback Position", simpleExoPlayer!!.currentPosition)
+//    }
 
     override fun onResume() {
         super.onResume()
@@ -95,7 +96,7 @@ class VideoFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-        simpleExoPlayer.stop()
-        simpleExoPlayer.release()
+        simpleExoPlayer?.stop()
+        simpleExoPlayer?.release()
     }
 }
