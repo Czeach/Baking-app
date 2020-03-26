@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/tabFragment"
-        android:name="com.example.android.bakingapp.tabs.TabFragment"
+        android:name="com.example.android.bakingapp.tabLayout.TabFragment"
         android:label="fragment_tab"
         tools:layout="@layout/fragment_tab" >
         <argument
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/videoFragment"
-        android:name="com.example.android.bakingapp.VideoFragment"
+        android:name="com.example.android.bakingapp.video.VideoFragment"
         tools:layout="@layout/fragment_video">
         <argument
             android:name="thisStep"

@@ -7,6 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?android:selectableItemBackground"
         android:foregroundGravity="left"
         android:paddingTop="4dp"
         android:paddingBottom="6dp">
@@ -18,26 +19,28 @@
             android:layout_marginStart="16dp"
             android:fontFamily="@font/alice"
             android:text="id"
-            android:textColor="#000000"
+            android:textColor="@color/colorPrimary"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/description_view"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/description_view" />
 
         <TextView
             android:id="@+id/description_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="24dp"
             android:fontFamily="@font/amiko"
             android:gravity="start"
             android:text="description"
             android:textColor="#000000"
             android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/arrow"
             app:layout_constraintStart_toEndOf="@+id/id_view"
-            app:layout_constraintTop_toTopOf="@+id/id_view" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/arrow"
@@ -45,11 +48,10 @@
             android:layout_height="28dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/right"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/description_view"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/description_view"
             tools:ignore="ContentDescription" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

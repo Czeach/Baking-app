@@ -6,6 +6,7 @@
         <item name="colorPrimary">#C2185B</item>
         <item name="colorPrimaryDark">#C2185B</item>
         <item name="colorAccent">#FFFFFF</item>
+
     </style>
 
 </resources>

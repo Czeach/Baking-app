@@ -3,8 +3,6 @@ package com.example.android.bakingapp.network
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
-//private var recipes: ArrayList<Recipe>? = null
-
 @Parcelize
 data class Recipe(
     val name: String,

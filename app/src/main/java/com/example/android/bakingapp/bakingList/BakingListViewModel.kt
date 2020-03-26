@@ -1,17 +1,13 @@
 package com.example.android.bakingapp.bakingList
 
-import android.app.Application
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.*
 import com.example.android.bakingapp.network.BakingApi
-import com.example.android.bakingapp.network.Ingredient
 import com.example.android.bakingapp.network.Recipe
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class BakingListViewModel: ViewModel() {
 

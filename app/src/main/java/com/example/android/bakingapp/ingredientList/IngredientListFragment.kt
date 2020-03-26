@@ -15,10 +15,6 @@ class IngredientListFragment : Fragment() {
 
     private var viewModel: BakingListViewModel? = null
 
-//    private val viewModel: BakingListViewModel by lazy {
-//        ViewModelProviders.of(this).get(BakingListViewModel::class.java)
-//    }
-
     var tabLayout: TabLayout? = null
     var viewPager: ViewPager? = null
 
@@ -31,28 +27,6 @@ class IngredientListFragment : Fragment() {
         val binding = FragmentIngredientListBinding.inflate(inflater)
 
         binding.setLifecycleOwner(this)
-
-////        binding.ingredientListViewModel = viewModel
-//
-//        tabLayout = binding.tabLayout
-//        viewPager = binding.viewPager
-//
-//        tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
-//
-//        val myTabsAdapter = TabsAdapter(activity!!.supportFragmentManager, tabLayout!!.tabCount)
-//        viewPager!!.adapter = myTabsAdapter
-//
-//        viewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
-//
-//        tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-//            override fun onTabSelected(tab: TabLayout.Tab?) {
-//                viewPager!!.currentItem = tab!!.position
-//            }
-//            override fun onTabUnselected(tab: TabLayout.Tab?) {
-//            }
-//            override fun onTabReselected(tab: TabLayout.Tab?) {
-//            }
-//        })
 
         return binding.root
     }
